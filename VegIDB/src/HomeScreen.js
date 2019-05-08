@@ -7,7 +7,7 @@ import {getDailyTip} from './DailyTips';
 import {WeatherScreen} from './Weather';
 import { connect } from 'react-redux';
 
-import { selectedUser } from './actions/userActions';
+import { selectedUser } from './actions/index';
 
 const DeviceWidth = Dimensions.get('window').width;
 const scaleVal = 0.4;
@@ -326,6 +326,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         people: state.people,
+        detailView: state.detailView
     }
 }
 export default connect(mapStateToProps, { selectedUser })(HomeScreen);

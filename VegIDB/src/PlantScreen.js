@@ -18,7 +18,7 @@ const DeviceWidth = Dimensions.get('window').width;
 const scaleVal = 0.4;
 
 import { connect } from 'react-redux';
-import {loadInitialPlants} from './actions/plantActions';
+import {loadInitialPlants} from './actions/index';
 
 // project ID = 5c92bc84f2a30baf4b46fea1
 //import { findFirst1 } from './Queries/findDB';
