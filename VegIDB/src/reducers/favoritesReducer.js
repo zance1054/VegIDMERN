@@ -11,21 +11,21 @@ export default (state = initialState, action) => {
         case 'INITIAL_FETCH':
             return {
                 ...state,
-                people: action.payload,
+                favorites: action.payload,
         }
 
         case 'SELECTED_FAV':
             return {
                 ...state,
                 detailView: true,
-                personSelected: action.selectId
+                favoriteSelected: action.selectId
             }
 
         case 'NONE_SELECTED':
             return {
                 ...state,
                 detailView: false,
-                personSelected: null
+                favoriteSelected: null
         }
 
         case 'SPECIFIC_FETCH':
@@ -43,34 +43,24 @@ export default (state = initialState, action) => {
         case 'NEW_FAV':
             return {
                 ...state,
-                plantName: '',
-                imageFileName: '',
-                plantDescription: '',
+                userID: '',
+                plantID: '',
             }
 
         case "ADD_FAV":
             return {
                 ...state,
-                ...action.newPlant
+                ...action.newFavorite
         }
 
-        case 'UPDATE_FAV':
-            return {
-                ...state,
-                toUpdate: true,
-                plantName: action.payload.firstName,
-                imageFileName: action.payload.lastName,
-                plantDescription: action.payload.phone,
-        }
 
         case 'SAVE_FAV':
             return {
                 ...state,
                 toUpdate: false,
                 detailView: false,
-                plantName: '',
-                imageFileName: '',
-                plantDescription: '',
+                plantID: '',
+                userID: '',
                 _id: '',
         }
 
@@ -78,7 +68,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 detailView: false,
-                personSelected: null,
+                favoriteSelected: null,
         }
 
         default:
