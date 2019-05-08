@@ -14,7 +14,8 @@
 */
 // create a new user that POSTS to mongoDB
 
-import ipAddress from './utils/address';
+const ipAddress = 'http://10.32.225.34:3000';
+
 
 export const createNewUser = ({firstName,lastName, email,password,aboutme}) =>
 {

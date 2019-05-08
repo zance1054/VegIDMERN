@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-n
 import { connect } from 'react-redux';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import * as actions from '../actions';
+import * as actions from '../actions/userActions';
 
 const theme = getTheme();
 

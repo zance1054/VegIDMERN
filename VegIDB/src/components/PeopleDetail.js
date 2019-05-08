@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import DetailView from './DetailView';
 import UpdatePerson from './UpdatePerson';
-import * as actions from '../actions';
+import * as actions from '../actions/userActions';
 
 
 
@@ -19,14 +19,14 @@ class PeopleDetail extends Component {
     render() {
         return (
             <View>
-               {this.renderDetails()} 
+               {this.renderDetails()}
             </View>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { 
+    return {
         toUpdate: state.toUpdate,
     }
 }

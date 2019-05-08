@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import PeopleItem from './PeopleItem';
 import PeopleDetail from './PeopleDetail';
-import { loadInitialUsers } from '../actions';
+import { loadInitialUsers } from '../actions/userActions';
 
 const styles = StyleSheet.create({
     container: {
