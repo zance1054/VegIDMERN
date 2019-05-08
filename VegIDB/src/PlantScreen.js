@@ -17,6 +17,9 @@ import {SearchBar} from 'react-native-elements';
 const DeviceWidth = Dimensions.get('window').width;
 const scaleVal = 0.4;
 
+import { connect } from 'react-redux';
+import {loadInitialPlants} from './actions/plantActions';
+
 // project ID = 5c92bc84f2a30baf4b46fea1
 //import { findFirst1 } from './Queries/findDB';
 
@@ -80,7 +83,7 @@ export class SlideMenu extends Component {
 
 }
 
-export class PlantsScreen extends Component {
+class PlantsScreen extends Component {
 
     static navigationOptions = {
         header: null
@@ -99,6 +102,9 @@ export class PlantsScreen extends Component {
     //Watered
     //Will mount: check state's previous date. If less than today's date, reset watered. else, ignore.
     componentDidMount(){
+        var arrayPlants = this.props.loadInitialPlants();
+        console.log("PLANTS HERE:");
+        console.log(arrayPlants);
         this.setState({items:
             [
                 { id: 0, name: 'TURQUOISE', code: '#1abc9c', liked: true }, { id: 1, name: 'EMERALD', code: '#2ecc71',liked: false },
@@ -336,3 +342,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   }
 });
+
+const mapStateToProps = state => {
+    return {
+        plants: state.plants,
+    }
+}
+export default connect(mapStateToProps, { loadInitialPlants })(PlantsScreen);

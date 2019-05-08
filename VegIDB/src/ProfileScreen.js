@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { ImageBackground, ScrollView, Image, StyleSheet, View, Text, FlatList, Dimensions } from 'react-native';
 import {Alert, AppRegistry, Platform, TouchableOpacity} from 'react-native';
-export class ProfileScreen extends Component {
+import { connect } from 'react-redux';
+import { selectedUser } from './actions/userActions';
+
+class ProfileScreen extends Component {
 
     constructor(props){
         super(props);
@@ -171,3 +174,10 @@ const styles = StyleSheet.create({
         marginLeft: 10
     }
 });
+
+const mapStateToProps = state => {
+    return {
+        people: state.people,
+    }
+}
+export default connect(mapStateToProps, { selectedUser })(ProfileScreen);

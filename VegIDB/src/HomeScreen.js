@@ -7,7 +7,7 @@ import {getDailyTip} from './DailyTips';
 import {WeatherScreen} from './Weather';
 import { connect } from 'react-redux';
 
-import { selectedUser } from './actions';
+import { selectedUser } from './actions/userActions';
 
 const DeviceWidth = Dimensions.get('window').width;
 const scaleVal = 0.4;
