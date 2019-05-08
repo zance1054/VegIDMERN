@@ -5,7 +5,7 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
 import { getTheme } from 'react-native-material-kit';
-import * as actions from '../actions';
+import * as actions from './actions';
 
 const theme = getTheme();
 

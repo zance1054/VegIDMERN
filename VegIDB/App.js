@@ -10,7 +10,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducers from '../reducers/userReducer';
+import reducers from './src/reducers/userReducer';
 import Navigation from './Navigation';
 import thunk from 'redux-thunk';
 

@@ -13,10 +13,12 @@
   User functions begin here
 */
 // create a new user that POSTS to mongoDB
+var ip = '192.168.43.18'
+
 export const createNewUser = ({firstName,lastName, email,password}) =>
 {
   return(dispatch) => {
-    fetch('http://10.32.225.34:3000/user', {
+    fetch('http://' + ip + ':3000/user', {
       method: "POST",
       body: JSON.stringify({
         "firstName": firstName,
@@ -39,7 +41,7 @@ export const createNewUser = ({firstName,lastName, email,password}) =>
 
 export const loadInitialUsers = () => {
     return (dispatch) => {
-        fetch('http://10.32.225.34:3000/user')
+        fetch('http://' + ip + ':3000/user')
             .then((response) => {
                 return response.json();})
             .then((data) => {
@@ -53,12 +55,13 @@ export const selectedUser = (usersId) => {
     return {
         type: 'SELECTED_USER',
         selectId: usersId,
+        name: 'fuckyoubitch'
     };
 };
 
 export const deleteUser = (id) => {
     return (dispatch) => {
-        fetch(`http://10.32.225.34:3000/user/${id}`, { method: "DELETE"})
+        fetch(`http://` + ip + `/user/${id}`, { method: "DELETE"})
             .then(() => {
                 dispatch({ type: 'DELETE_USER'});
             })
@@ -74,7 +77,7 @@ export const updateUser = (USER) => {
 
 export const saveUser = ({ firstName,lastName, email,password, _id }) => {
     return (dispatch) => {
-        fetch(`http://10.32.225.34:3000/user/${_id}`, {
+        fetch(`http://` + ip + `/user/${id}`, {
             method: "PUT",
             body: JSON.stringify({
                 "firstName": firstName,
@@ -102,7 +105,7 @@ plants start here
 export const createNewPlant = ({plantName, imageFileName,imageFile, plantDescription}) =>
 {
   return(dispatch) => {
-    fetch('http://10.32.225.34:3000/plant', {
+    fetch('http://' + ip + ':3000/plant', {
       method: "POST",
       body: JSON.stringify({
         "plantName": plantName,
@@ -125,7 +128,7 @@ export const createNewPlant = ({plantName, imageFileName,imageFile, plantDescrip
 
 export const loadInitialPlants = () => {
     return (dispatch) => {
-        fetch('http://10.32.225.34:3000/plant')
+        fetch('http://' + ip + ':3000/plant')
             .then((response) => {
                 return response.json();})
             .then((data) => {

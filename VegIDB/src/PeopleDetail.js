@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import DetailView from './DetailView';
 import UpdatePerson from './UpdatePerson';
-import * as actions from '../actions';
+import * as actions from './actions';
 
 
 

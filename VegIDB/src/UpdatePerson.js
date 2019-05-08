@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { MKTextField, MKColor, MKButton } from 'react-native-material-kit';
-import * as actions from '../actions';
+import * as actions from './actions';
 
 const styles = StyleSheet.create({
     form: {
