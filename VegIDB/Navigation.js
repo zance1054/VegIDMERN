@@ -23,12 +23,13 @@ import {LoginScreen} from './src/LoginScreen';
 import {PlantsResultsScreen} from './src/PlantsResultsScreen';
 import {InsertPlantForm, UpdatePlantForm} from './src/PlantForm';
 import { NewUserForm, UpdateUserForm } from './src/UserForm';
-import ProfileScreen from './src/ProfileScreen';
 import {StatsScreen} from './src/StatsScreen';
 import {SignInScreen} from './src/SignInScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './src/HomeScreen';
 import PlantsScreen from './src/PlantScreen';
+import ProfileScreen from './src/ProfileScreen';
+
 
 
 const HomeStack = createStackNavigator(
