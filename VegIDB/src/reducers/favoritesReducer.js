@@ -1,12 +1,9 @@
 const initialState = {
-    people: [],
-    detailView: false,
-    personSelected: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    userSummary:'',
+    favorites: [],
+    userID: false,
+    plantID: null,
+    _id: '',
+    toUpdate: false,
 }
 
 export default (state = initialState, action) => {
@@ -17,7 +14,7 @@ export default (state = initialState, action) => {
                 people: action.payload,
         }
 
-        case 'SELECTED_USER':
+        case 'SELECTED_FAV':
             return {
                 ...state,
                 detailView: true,
@@ -31,52 +28,53 @@ export default (state = initialState, action) => {
                 personSelected: null
         }
 
+        case 'SPECIFIC_FETCH':
+          return {
+            ...state,
+            plantID: action.payload,
+          }
+
         case 'FORM_UPDATE':
             return {
                 ...state,
                 [action.payload.prop]: action.payload.value
         }
 
-        case 'NEW_USER':
+        case 'NEW_FAV':
             return {
                 ...state,
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
+                plantName: '',
+                imageFileName: '',
+                plantDescription: '',
             }
 
-        case "ADD_USER":
+        case "ADD_FAV":
             return {
                 ...state,
-                ...action.newPerson
+                ...action.newPlant
         }
 
-        case 'UPDATE_USER':
+        case 'UPDATE_FAV':
             return {
                 ...state,
                 toUpdate: true,
-                firstName: action.payload.firstName,
-                lastName: action.payload.lastName,
-                phone: action.payload.phone,
-                email: action.payload.email,
-                password: action.payload.password,
-                _id: action.payload._id,
+                plantName: action.payload.firstName,
+                imageFileName: action.payload.lastName,
+                plantDescription: action.payload.phone,
         }
 
-        case 'SAVE_USER':
+        case 'SAVE_FAV':
             return {
                 ...state,
                 toUpdate: false,
                 detailView: false,
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
+                plantName: '',
+                imageFileName: '',
+                plantDescription: '',
                 _id: '',
         }
 
-        case "DELETE_USER":
+        case "DELETE_FAV":
             return {
                 ...state,
                 detailView: false,
