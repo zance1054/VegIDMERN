@@ -53,10 +53,13 @@ export const loadInitialUsers = () => {
     };
 };
 
+
+
 export const selectedUser = (usersId) => {
     return {
         type: 'SELECTED_USER',
         selectId: usersId,
+        name: "asdf"
     };
 };
 

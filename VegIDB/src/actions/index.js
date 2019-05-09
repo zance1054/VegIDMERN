@@ -12,11 +12,48 @@
 /*
   User functions begin here
 */
+
+/*
+  Neither plant nor user (form updaters)
+*/
+export const noneSelected = () => {
+    return {
+        type: 'NONE_SELECTED',
+    };
+};
+
+
+export const formUpdate = ({ prop, value }) => {
+    return {
+        type: 'FORM_UPDATE',
+        payload: { prop, value },
+    };
+};
+
+export const selectedUser = (usersID) => {
+    return {
+        type: 'SELECTED_USER',
+        selectId: usersID,
+    };
+};
+
+export const loadUser = (userID) => {
+    return (dispatch) => {
+        fetch('http://192.168.43.18:3000/user/'+userID)
+            .then((response) => {
+                return response.json();})
+            .then((data) => {
+                dispatch({ type: 'INITIAL_FETCH', payload: data })
+            })
+            .catch(error => console.log(error))
+    };
+};
+
 // create a new user that POSTS to mongoDB
 export const createNewUser = ({firstName,lastName, email,password}) =>
 {
   return(dispatch) => {
-    fetch('http://10.32.225.34:3000/user', {
+    fetch('http://192.168.43.18:3000/user', {
       method: "POST",
       body: JSON.stringify({
         "firstName": firstName,
@@ -39,7 +76,7 @@ export const createNewUser = ({firstName,lastName, email,password}) =>
 
 export const loadInitialUsers = () => {
     return (dispatch) => {
-        fetch('http://192.168.43.18:3000/user')
+        fetch('http:// 192.168.43.18:3000/user')
             .then((response) => {
                 return response.json();})
             .then((data) => {
@@ -49,12 +86,7 @@ export const loadInitialUsers = () => {
     };
 };
 
-export const selectedUser = (usersId) => {
-    return {
-        type: 'SELECTED_USER',
-        selectId: usersId,
-    };
-};
+
 
 export const deleteUser = (id) => {
     return (dispatch) => {
@@ -125,7 +157,7 @@ export const createNewPlant = ({plantName, imageFileName,imageFile, plantDescrip
 
 export const loadInitialPlants = () => {
     return (dispatch) => {
-        fetch('http://192.168.43.18:3000/plant')
+        fetch('http:// 192.168.43.18:3000/plant')
             .then((response) => {
                 return response.json();})
             .then((data) => {
@@ -181,19 +213,4 @@ export const savePlant = ({ plantName, imageFileName,imageFile, plantDescription
     };
 }
 
-/*
-  Neither plant nor user (form updaters)
-*/
-export const noneSelected = () => {
-    return {
-        type: 'NONE_SELECTED',
-    };
-};
 
-
-export const formUpdate = ({ prop, value }) => {
-    return {
-        type: 'FORM_UPDATE',
-        payload: { prop, value },
-    };
-};

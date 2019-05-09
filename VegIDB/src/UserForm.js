@@ -43,6 +43,7 @@ export class NewUserForm extends Component {
 
   }
 
+  //View for our Users
   render() {
     const { navigation } = this.props;
 
@@ -72,7 +73,7 @@ export class NewUserForm extends Component {
 
 export class UpdateUserForm extends Component {
 
-  //USE NEW User INSERT QUERY HERE
+  //Updates the user OnClick
   onPress=()=> {
     // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
@@ -92,6 +93,7 @@ export class UpdateUserForm extends Component {
         UserName: user.name,
     };
 
+    //Returns a scrollview for our user form for update
     return (
       <ScrollView>
       <View style={styles.container}>
@@ -126,7 +128,7 @@ export class UpdateUserForm extends Component {
 }
 
 
-
+//Styling
 var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',

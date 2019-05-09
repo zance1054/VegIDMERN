@@ -3,6 +3,7 @@ import { ImageBackground, ScrollView, Image, StyleSheet, View, Text, FlatList, D
 import {Alert, AppRegistry, Platform, TouchableOpacity} from 'react-native';
 export class PlantsResultsScreen extends Component {
 
+    //constructor
     constructor(props){
         super(props);
         this.editPlant = this.editPlant.bind(this);
@@ -11,6 +12,8 @@ export class PlantsResultsScreen extends Component {
         }
     }
 
+    //Before all the components are mounted onto the applicatoin
+    //Sets the state of the plant to thePlant
     componentWillMount(){
         const { navigation } = this.props;
         const thePlant = navigation.getParam('item', 'NO-ID');
@@ -18,10 +21,13 @@ export class PlantsResultsScreen extends Component {
             plant: thePlant
         });
     }
+
+    //Rids of the navigation header
     static navigationOptions = {
             header: null
         };
 
+    //On click, edit the plant. Navigates to the UpdatePlantForm with preset data.
     editPlant(plant){
         console.log(plant.id);
         console.log(plant.name);
@@ -29,10 +35,8 @@ export class PlantsResultsScreen extends Component {
         this.props.navigation.navigate('UpdatePlantForm', {plant});
     }
 
-
+    //Renders our views
     render() {
-
-
         return (
             <ScrollView style={{backgroundColor:'white'}}>
             <ImageBackground
@@ -60,7 +64,7 @@ export class PlantsResultsScreen extends Component {
                          <View style={[styles.plantTitleBox, {height: 110}, {backgroundColor: '#ccb29d'}]}>
                              <Text style ={[styles.plantSubTitle,{textAlign: 'left'}, {marginLeft: 10}, {fontWeight: 'bold'}]}> About </Text>
                              <Text style ={styles.plantDescription}>
-                                Lorem Ipsum suck a bitch motherfucker waht the fuck do you want I do gorilla warfare in the united states navy
+                                I am a plant. Kneel before me. I am a plant. Kneel before me. I am a plant. Kneel before me. I am a plant. Kneel before me.
                              </Text>
                          </View>
                      </View>
@@ -72,6 +76,7 @@ export class PlantsResultsScreen extends Component {
     }
 }
 
+//Styling for all of our views
 const styles = StyleSheet.create({
     picture: {
         flex:1,

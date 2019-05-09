@@ -7,21 +7,24 @@ import {getDailyTip} from './DailyTips';
 import {WeatherScreen} from './Weather';
 import { connect } from 'react-redux';
 
-import { selectedUser } from './actions/index';
+import { selectedUser, loadUser } from './actions/index';
 
 const DeviceWidth = Dimensions.get('window').width;
 const scaleVal = 0.4;
 
+//List of months to reference for the date
 var months =["Jan", "Feb", "March",
              "April", "May", "June",
              "July", "August", "September",
              "October", "November", "December"];
 
+//Our Home Screen when tab is selected
 class HomeScreen extends Component {
     static navigationOptions = {
         header: null
     };
 
+    //Constructor
     constructor(props){
         super(props)
 
@@ -33,11 +36,8 @@ class HomeScreen extends Component {
         }
     }
 
-    //get userID from token
+    //Before our components mount, get the dates and daily tips and set them in our current state
     componentWillMount(){
-        var name = this.props.selectedUser("5cd256b43405bf42d8628b43").name;
-        console.log("here");
-        console.log(name);
         var that = this;
         var date = new Date().getDate(); //Current day
         var month = new Date().getMonth() + 1;
@@ -46,39 +46,14 @@ class HomeScreen extends Component {
           date:
             months[month - 1] + ' ' + date + 'th, ' + year,
           dailyTip: getDailyTip(),
-          userName: name,
         });
     }
 
-    renderWebView(){
-        if(this.state.check){
-            return(
-                <WebView
-                source={{uri: 'https://stackoverflow.com/questions/41236255/open-webview-on-touchableopacity-onpress-react-native'}}
-                style={{marginTop: 20}}
-                />
-            );
-            }else {
-            return(
-                <TouchableOpacity
-                onPress={()=>this.setState({check: true})}>
-                    <Text style={{fontSize: 50}}>News</Text>
-                </TouchableOpacity>
-            );
-        }
-    }
-
-    handleClick = (data) => {
-        this.props.navigation.navigate(data);
-    }
-
-    signOutAsync = async() => {
-        console.log("loggin you out");
-        console.log("here: ");
-        await AsyncStorage.removeItem('userToken');
-        this.props.navigation.navigate('Auth');
-    };
-
+    //Renders our home page, which...
+    //says hi to our user,
+    //has a box displaying the date and seasonal background
+    //has a box displaying weather for the day in your specific area
+    //a tip about plants that changes everytime the component mounts
     render() {
 
         return (
@@ -100,7 +75,7 @@ class HomeScreen extends Component {
                                Welcome Home, {" "}
                             </Text>
                             <Text style ={[styles.plantTitle, {color: 'green'}]}>
-                                {this.state.userName}
+                                Brad
                             </Text>
                          </View>
 
@@ -148,46 +123,13 @@ class HomeScreen extends Component {
                 </ImageBackground>
             </ScrollView>
 
-            <ActionButton onPress={() => this._panel.show() }
-                 buttonColor="rgba(0,66,14,1)"
-                 position="center"
-                 offsetY={0}
-                 />
 
-             <SlidingUpPanel
-                     allowDragging = {false}
-                     ref={c => this._panel = c}>
-                    <View style={styles.fourSquareMenuContainer}>
-                            <View style={styles.fourSquareMenuRow}>
-                                <View>
-                                    <TouchableOpacity onPress={() => this.handleClick('Plants')}>
-                                        <View style={[styles.fourSquare, {borderTopLeftRadius: 10}]}>
-                                            <Text> CAMTONO BEAN </Text>
-                                            <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.handleClick("Plants")}>
-                                        <View style={[styles.fourSquare, {borderBottomLeftRadius: 10}]}>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                <View>
-                                    <TouchableOpacity onPress={() => this.handleClick('Plants')}>
-                                        <View style={[styles.fourSquare, {marginLeft: 1}, {borderTopRightRadius: 10}]} />
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.signOutAsync()}>
-                                        <View style={[styles.fourSquare, {marginLeft: 1}, {backgroundColor: 'red'}, {borderBottomRightRadius: 10}]} />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                 </SlidingUpPanel>
              </View>
         );
     }
 }
 
-
+//Styling for our view
 const styles = StyleSheet.create({
 
     picture: {
@@ -329,4 +271,4 @@ const mapStateToProps = state => {
         detailView: state.detailView
     }
 }
-export default connect(mapStateToProps, { selectedUser })(HomeScreen);
+export default connect(mapStateToProps, { selectedUser, loadUser })(HomeScreen);

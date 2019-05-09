@@ -18,7 +18,7 @@ const DeviceWidth = Dimensions.get('window').width;
 const scaleVal = 0.4;
 
 import { connect } from 'react-redux';
-import {loadInitialPlants} from './actions/index';
+import {loadInitialPlants, selectedUser} from './actions/index';
 
 // project ID = 5c92bc84f2a30baf4b46fea1
 //import { findFirst1 } from './Queries/findDB';
@@ -28,8 +28,6 @@ export class SlideMenu extends Component {
     static navigationOptions = {
         header: null,
     };
-
-
 
     render() {
         handleClick = (data) => {
@@ -57,7 +55,7 @@ export class SlideMenu extends Component {
                                        <View>
                                            <TouchableOpacity onPress={() => this.handleClick('Camera')}>
                                                <View style={[styles.fourSquare, {borderTopLeftRadius: 10}]}>
-                                                   <Text> CAMTONO BEAN </Text>
+                                                   <Text style={{textAlign:'center'}}> CAMERA </Text>
                                                    <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
                                                </View>
                                            </TouchableOpacity>
@@ -83,12 +81,13 @@ export class SlideMenu extends Component {
 
 }
 
-class PlantsScreen extends Component {
-
+export class PlantsScreen extends Component {
+    //Rids of a header
     static navigationOptions = {
         header: null
     };
 
+    //Constructor
     constructor(props){
         super(props)
         this.state = {
@@ -96,23 +95,18 @@ class PlantsScreen extends Component {
         }
     }
 
-
-
-    //DATABASE: GET ALL PLANTS : LIST OF PLANTS
-    //Watered
-    //Will mount: check state's previous date. If less than today's date, reset watered. else, ignore.
+    //After the components mount, set the objects for our plants
     componentDidMount(){
-        var arrayPlants = this.props.loadInitialPlants();
-        console.log("PLANTS HERE:");
-        console.log(arrayPlants);
         this.setState({items:
             [
-                { id: 0, name: 'TURQUOISE', code: '#1abc9c', liked: true }, { id: 1, name: 'EMERALD', code: '#2ecc71',liked: false },
-                { id: 2, name: 'PETER RIVER', code: '#3498db',liked: false }, { id: 3,name: 'AMETHYST', code: '#9b59b6',liked: false },
-                { id: 4, name: 'WET ASPHALT', code: '#34495e',liked: false }, { id: 5, name: 'GREEN SEA', code: '#16a085',liked: false },
-                { id: 6, name: 'NEPHRITIS', code: '#27ae60',liked: false }, { id: 7, name: 'BELIZE HOLE', code: '#2980b9',liked: false },
-                { id: 8, name: 'WISTERIA', code: '#8e44ad',liked: false }, { id: 9, name: 'MIDNIGHT BLUE', code: '#2c3e50',liked: false },
-                { id: 10, name: 'SUN FLOWER', code: '#f1c40f',liked: false }, { id: 11, name: 'CARROT', code: '#e67e22',liked: false },
+                { id: 0, name: 'Cactus', image: './Images/cactus.jpg', code: '#1abc9c', liked: true }, { id: 1, name: 'Cactus', image: './Images/cactus1.jpg', code: '#2ecc71',liked: false },
+                { id: 2, name: 'Lily', image: './Images/lily.jpg', code: '#3498db',liked: false }, { id: 3,name: 'Cactus', image:'/Images/cactus3.jpg', code: '#9b59b6',liked: false },
+                { id: 4, name: 'Shrub', image: './Images/shrub.jpg', code: '#34495e',liked: false }, { id: 5, name: 'Dandelion', image: '/Images/dandelion.jpg', code: '#324222', liked: false },
+                { id: 6, name: 'Tree', image: './Images/tree.jpg', code: '#27ae60',liked: false }, { id: 7, name: 'Tree', image:'./Images/tree2.jpg', code: '#2980b9',liked: false },
+                { id: 12, name: 'ALIZARIN', code: '#e74c3c',liked: false }, { id: 13, name: 'CLOUDS', code: '#ecf0f1',liked: false },
+                { id: 14, name: 'CONCRETE', code: '#95a5a6',liked: false }, { id: 15, name: 'ORANGE', code: '#f39c12',liked: false },
+                { id: 16, name: 'PUMPKIN', code: '#d35400',liked: false }, { id: 17, name: 'POMEGRANATE', code: '#c0392b',liked: false },
+                { id: 18, name: 'SILVER', code: '#bdc3c7',liked: false }, { id: 19, name: 'ASBESTOS', code: '#7f8c8d',liked: false },
                 { id: 12, name: 'ALIZARIN', code: '#e74c3c',liked: false }, { id: 13, name: 'CLOUDS', code: '#ecf0f1',liked: false },
                 { id: 14, name: 'CONCRETE', code: '#95a5a6',liked: false }, { id: 15, name: 'ORANGE', code: '#f39c12',liked: false },
                 { id: 16, name: 'PUMPKIN', code: '#d35400',liked: false }, { id: 17, name: 'POMEGRANATE', code: '#c0392b',liked: false },
@@ -121,14 +115,14 @@ class PlantsScreen extends Component {
         });
     }
 
-    //DATABASE: trigger !liked
+    //DATABASE: trigger !liked to show that we have FAVORITED or UNFAVORITED
     toggleLike = (item) => {
         let temp = this.state.items;
         temp[item.id].liked = !temp[item.id].liked;
         this.setState({items: temp});
     }
 
-    //DATABASE: trigger !watered
+    //DATABASE: trigger !watered to show that we have watered the plant or unmark it
     toggleWater = (item) => {
         let temp = this.state.items;
         temp[item.id].watered = !temp[item.id].watered;
@@ -147,26 +141,11 @@ class PlantsScreen extends Component {
             this.props.navigation.navigate(data);
     }
 
-    hexToRgb(hex) {
-        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-            return r + r + g + g + b + b;
-        });
 
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16),
-            a: .5
-        } : null;
-    }
-
-    getRgb(json){
-        var rgba = "rgba(" + json.r + "," + json.g + "," + json.b + "," + json.a + ")"
-    }
-
+    //Views of a grid of our plants with...
+    //a card dedicated to a plant
+    //a function to FAVORITE or LIKE a plant which puts it in your own repository
+    //the ability to navigate to the plant's specific results page with its own information
     render() {
         //Need MongoDB Query to get this shit
         //List of JSON Objects
@@ -227,8 +206,7 @@ class PlantsScreen extends Component {
                                            <View>
                                                <TouchableOpacity onPress={() => this.handleClickSquare('Camera')}>
                                                    <View style={[styles.fourSquare, {borderTopLeftRadius: 10}]}>
-                                                       <Text> CAMTONO BEAN </Text>
-                                                       <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
+                                                       <Text style={{textAlign:'center'}}> CAMERA </Text>
                                                    </View>
                                                </TouchableOpacity>
                                                <TouchableOpacity onPress={() => this.handleClickSquare("Plants")}>
@@ -253,7 +231,7 @@ class PlantsScreen extends Component {
     }
 }
 
-
+//Styling for our views
 const styles = StyleSheet.create({
     headerTitleBox: {
         marginTop: 30,
@@ -343,9 +321,10 @@ const styles = StyleSheet.create({
   }
 });
 
+
 const mapStateToProps = state => {
     return {
         plants: state.plants,
     }
 }
-export default connect(mapStateToProps, { loadInitialPlants })(PlantsScreen);
+export default connect(mapStateToProps, { loadInitialPlants, selectedUser })(PlantsScreen);

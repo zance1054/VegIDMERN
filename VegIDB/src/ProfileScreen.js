@@ -6,20 +6,24 @@ import { selectedUser } from './actions/userActions';
 
 class ProfileScreen extends Component {
 
+    //Constructor
     constructor(props){
         super(props);
         this.editUser = this.editUser.bind(this);
     }
+
+    //Rids of the header
     static navigationOptions = {
         header: null
     };
 
+    //OnClick, navigates you to the EditProfile Form
     editUser(user){
         console.log(user.name);
         this.props.navigation.navigate('EditProfile', {user});
     }
 
-
+    //Renders the views
     render() {
         const { navigation } = this.props;
         //User is here
@@ -73,7 +77,7 @@ class ProfileScreen extends Component {
                          <View style={[styles.UserTitleBox, {height: 110}, {backgroundColor: 'rgba(124,85,0,.1)'}]}>
                              <Text style ={[styles.UserSubTitle,{textAlign: 'left'}, {marginLeft: 10}, {fontWeight: 'bold'}]}> About </Text>
                              <Text style ={styles.UserDescription}>
-                                Lorem Ipsum suck a bitch motherfucker waht the fuck do you want I do gorilla warfare in the united states navy
+                                Hey everyone! I am a friendly gardener who is here to be fun! Water my plants.
                              </Text>
                          </View>
                      </View>
@@ -85,6 +89,7 @@ class ProfileScreen extends Component {
     }
 }
 
+//Styling for all of out views
 const styles = StyleSheet.create({
     picture: {
         flex:1,

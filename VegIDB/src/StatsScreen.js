@@ -3,6 +3,8 @@ import { LineChart, Grid, XAxis, PieChart } from 'react-native-svg-charts';
 import { Defs, LinearGradient, Stop } from 'react-native-svg';
 import {  ScrollView, StyleSheet, View, Text, FlatList, Dimensions, Button, Image, ImageBackground } from 'react-native';
 
+import { selectedUser, loadUser } from './actions/index';
+
 var months =["Jan", "Feb", "March",
              "April", "May", "June",
              "July", "August", "September",
@@ -10,8 +12,7 @@ var months =["Jan", "Feb", "March",
 
 var sevenMonths = [];
 
-export class StatsScreen extends Component {
-
+class StatsScreen extends Component {
 
     static navigationOptions = {
         title: 'Statistics',
@@ -24,7 +25,7 @@ export class StatsScreen extends Component {
         },
     };
 
-
+    //Before the component mounts, gets the previous seven months to graph
     componentWillMount(){
         var month = new Date().getMonth();
         //get previous 7 months
@@ -45,11 +46,12 @@ export class StatsScreen extends Component {
         console.log(sevenMonths);
     }
 
+    //Renders different sections that contain statistics on DeadvsAlive plants,
+    //Number of Plants added over time, and anything else we would like
+    //
     render() {
-
-        const deadAlive = [ 12, 3 ];
+        const deadAlive = [ 12, 5 ];
         const plantsAdded = [2, 4, 10, 3, 15, 4, 7];
-
         const randomColor = () => ('#' + (Math.random() * 0xFFFFFF << 0).toString(16) + '000000').slice(0, 7)
         const pieData = deadAlive
             .filter(value => value > 0)
@@ -57,7 +59,7 @@ export class StatsScreen extends Component {
                 value,
                 svg: {
                     fill: randomColor(),
-                    onPress: () => console.log('press', value),
+                    onPress: () => alert('This is ' + value),
                     label: "as"
                 },
                 key: `pie-${index}`,
@@ -154,3 +156,5 @@ const styles = StyleSheet.create({
 
     },
 });
+
+export default connect(mapStateToProps, { selectedUser, loadUser })(StatsScreen)

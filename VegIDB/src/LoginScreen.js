@@ -11,9 +11,8 @@ export class LoginScreen extends Component {
             },
         };
 
-    onPress = () => {
-    }
 
+    //Standard login screen with sign up / sign in mechanics
     render() {
         return (
 
@@ -24,7 +23,7 @@ export class LoginScreen extends Component {
                 height: '100%',
                 resizeMode: 'center',
                 }}
-                source={require('./Images/background.jpg')}>
+                source={require('./Images/homeBack.jpg')}>
                 <View style={{flex: 1, marginTop: '10%', alignItems: "center", justifyContent: "center"}}>
                     <Image style={{
                         flex: 1,

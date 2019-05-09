@@ -7,7 +7,7 @@ import { FlatGrid } from 'react-native-super-grid';
 
 
 
-
+//Gets the weather and puts it in our home screen box
 export class WeatherScreen extends Component {
 
 	constructor(props){

@@ -46,6 +46,7 @@ export const selectedPlant = (usersId) => {
     return {
         type: 'SELECTED_PLANT',
         selectId: usersId,
+        name: "dlskfnasd"
     };
 };
 
